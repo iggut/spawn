@@ -39,5 +39,5 @@
   ];
 
   # Mullvad VPN
-  services.mullvad-vpn.enable = lib.mkDefault true;
+  services.mullvad-vpn.enable = true;
 }
