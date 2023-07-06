@@ -11,6 +11,7 @@
 
   environment = {
     variables = {
+      LIBSEAT_BACKEND = "logind";
       NIXOS_OZONE_WL = "1";
       _JAVA_AWT_WM_NONEREPARENTING = "1";
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
