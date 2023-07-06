@@ -39,8 +39,7 @@
     '';
   };
   
-  home.sessionVariables = {
-    BROWSER = "google-chrome-beta";
+  sessionVariables = {
     TERMINAL = "kitty";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORMTHEME = "gtk3";
