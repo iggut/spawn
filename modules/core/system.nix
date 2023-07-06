@@ -22,6 +22,8 @@
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = true;
     };
+    # Mullvad VPN
+    mullvad-vpn.enable = true;
   };
 
   programs = {
