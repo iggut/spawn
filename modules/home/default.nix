@@ -37,4 +37,7 @@
     ./vscode
     ./zathura
   ];
+
+  # Mullvad VPN
+  services.mullvad-vpn.enable = lib.mkDefault true;
 }

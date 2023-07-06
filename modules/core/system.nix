@@ -14,6 +14,14 @@
       RuntimeMaxUse=10M
     '';
     udisks2.enable = true;
+    xserver = {
+      enable = true;
+      libinput.enable = true;
+      libinput.touchpad.tapping = true; #tap
+      # Enable Gnome login
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = true;
+    };
   };
 
   programs = {
