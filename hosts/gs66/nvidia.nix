@@ -38,8 +38,8 @@
     Option "TearFree" "true"
     '';
   };
-  
-  sessionVariables = {
+
+  environment.variables = {
     TERMINAL = "kitty";
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORMTHEME = "gtk3";
@@ -67,12 +67,6 @@
     XDG_CONFIG_HOME = "\${HOME}/.config";
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
-  };
-
-  environment.variables = {
-    GBM_BACKEND = "nvidia-drm";
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   environment.systemPackages = with pkgs; [
