@@ -47,12 +47,17 @@
         }
       ];
       services = {
-        login.enableGnomeKeyring = true;
         swaylock = {
           text = ''
             auth include login
           '';
         };
+      };
+      yubico = {
+        debug = true;
+        enable = true;
+        mode = "challenge-response";
+        id = [ "23911227" ];
       };
     };
 

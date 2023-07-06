@@ -8,7 +8,7 @@
       packages = with pkgs; [dconf gcr udisks2];
       enable = true;
     };
-    udev.packages = with pkgs; [gnome.gnome-settings-daemon android-udev-rules];
+    udev.packages = with pkgs; [yubikey-personalization gnome.gnome-settings-daemon android-udev-rules];
     journald.extraConfig = ''
       SystemMaxUse=50M
       RuntimeMaxUse=10M
@@ -16,6 +16,8 @@
     udisks2.enable = true;
     xserver = {
       enable = true;
+      layout = "us";
+      xkbVariant = "";
       libinput.enable = true;
       libinput.touchpad.tapping = true; #tap
       # Enable Gnome login
@@ -24,10 +26,14 @@
     };
     # Mullvad VPN
     mullvad-vpn.enable = true;
+    pcscd.enable = true;
   };
 
   programs = {
     dconf.enable = true;
+    _1password.enable = true;
+    _1password-gui.enable = true;
+    _1password-gui.polkitPolicyOwners = [ "iggut" "root" ];
     bash.promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
   };
 
@@ -54,6 +60,8 @@
     hardwareClockInLocalTime = false;
   };
   hardware.ledger.enable = true;
+
+  hardware.gpgSmartcards.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
