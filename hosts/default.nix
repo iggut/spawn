@@ -22,7 +22,7 @@
     users.iggut = ../modules/home;
   };
 in {
-  # all my hosts are named after zelda creatures btw
+
 
   # laptop
   gs66 = nixpkgs.lib.nixosSystem {

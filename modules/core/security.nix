@@ -47,6 +47,8 @@
         }
       ];
       services = {
+        # Mullvad VPN
+        mullvad-vpn.enable = true;
         login.enableGnomeKeyring = true;
         swaylock = {
           text = ''
