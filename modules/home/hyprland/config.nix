@@ -14,7 +14,7 @@
       $mod = SUPER
 
       # startup programs alongside hyprland
-      exec-once = dbus-update-activation-environment --systemd --all
+      
       exec-once = hyprpaper
       exec-once = mako
       exec-once = eww daemon && eww open bar
