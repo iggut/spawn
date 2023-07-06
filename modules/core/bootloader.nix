@@ -14,7 +14,7 @@
     initrd.systemd.enable = true;
     initrd.supportedFilesystems = ["btrfs"];
     # switch from old kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_stable;
     # load modules on boot
     kernelModules = ["acpi_call"];
 
