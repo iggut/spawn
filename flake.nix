@@ -89,13 +89,9 @@
             nix
             home-manager
             git
-            btop
-            neofetch
 
             nil
-            nwg-drawer
             alejandra
-            sfwbar
 
             sops
             ssh-to-age
