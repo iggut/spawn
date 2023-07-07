@@ -12,7 +12,10 @@ with lib; let
     Install.WantedBy = ["graphical-session.target"];
   };
 in {
-  imports = [./config.nix ../eww ../../../hosts/${osConfig.networking.hostName}/wallpaper.nix ];
+  imports = [
+    ./config.nix ../eww ../../../hosts/${osConfig.networking.hostName}/wallpaper.nix 
+    ./sfwbar.nix
+  ];
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
     hyprpaper
@@ -21,6 +24,7 @@ in {
     brillo
     pamixer
     python39Packages.requests
+    sfwbar
     slurp
     swappy
     wl-clipboard

@@ -11,13 +11,12 @@
   wayland.windowManager.hyprland.extraConfig =
     builtins.readFile ../../../hosts/${osConfig.networking.hostName}/hyprland.txt
     + ''
-      $mod = SUPER
-
       # startup programs alongside hyprland
       
       exec-once = hyprpaper
       exec-once = mako
       exec-once = eww daemon && eww open bar
+      exec-once = sfwbar &
 
       input {
         kb_layout = us
@@ -27,7 +26,7 @@
         touchpad {
           natural_scroll = true
           clickfinger_behavior = true
-          tap-to-click = false
+          tap-to-click = true
         }
       }
 
@@ -132,99 +131,127 @@
       layerrule = blur, ^(gtk-layer-shell|anyrun)$
       layerrule = ignorezero, ^(gtk-layer-shell|anyrun)$
 
-      # media controls
-      bindl = , XF86AudioPlay, exec, playerctl play-pause
-      bindl = , XF86AudioPrev, exec, playerctl previous
-      bindl = , XF86AudioNext, exec, playerctl next
+      $files = thunar
+      $browser = firefox
+      $term = kitty
+      $editor = code
+      # Set mod key to Super
+      $mainMod = SUPER
 
-      # volume
-      bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%+
-      binde = , XF86AudioRaiseVolume, exec, ${config.home.homeDirectory}/.config/eww/scripts/volume osd
-      bindle = , XF86AudioLowerVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%-
-      binde = , XF86AudioLowerVolume, exec, ${config.home.homeDirectory}/.config/eww/scripts/volume osd
-      bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-      bind = , XF86AudioMute, exec, ${config.home.homeDirectory}/.config/eww/scripts/volume osd
-      bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+      #Desktop usage
+      bind = $mainMod, R, exec, rofi -show drun
+      bind = $mainMod, V, exec, clipman pick -t rofi
+      bind = , Print, exec, grim - | wl-copy
+      bind = SHIFT, insert, exec, grim - | swappy -f -
+      bind = $mainMod, insert, exec, grim -g "$(slurp)" - | wl-copy
+      bind = $mainMod SHIFT, insert, exec, grim -g "$(slurp)" - | swappy -f -
+      bind = $mainMod, L, exec, wlogout
+      bind = $mainMod, N, exec, swaync-client -t -sw
+      bind = $mainMod SHIFT, N, exec, swaync-client -d -sw
 
-      # backlight
-      bindle = , XF86MonBrightnessUp, exec, brillo -q -u 300000 -A 5
-      binde = , XF86MonBrightnessUp, exec, ${config.home.homeDirectory}/.config/eww/scripts/brightness osd
-      bindle = , XF86MonBrightnessDown, exec, brillo -q -u 300000 -U 5
-      binde = , XF86MonBrightnessDown, exec, ${config.home.homeDirectory}/.config/eww/scripts/brightness osd
+      bindr = SUPER, SUPER_L, exec, nwg-drawer
 
-      # mouse movements
-      bindm = $mod, mouse:272, movewindow
-      bindm = $mod, mouse:273, resizewindow
-      bindm = $mod ALT, mouse:272, resizewindow
-      bind = $mod, mouse_down, workspace, e+1
-      bind = $mod, mouse_up, workspace, e-1
+      bind = $mainMod, D, exec, thunar
+      bind = $mainMod SHIFT, Q, killactive,
+      bind = $mainMod SHIFT, Return, exec, $files
+      bind = $mainMod SHIFT, Space, togglefloating,
+      bind = $mainMod, E, exec, code
+      bind = $mainMod, F, fullscreen
+      bind = $mainMod, Q, killactive,
+      bind = $mainMod, Return, exec, $term
+      bind = $mainMod, T, exec, $term
+      bind = $mainMod, V, exec, pavucontrol
+      bind = $mainMod, Space, togglefloating,
 
-      # compositor commands
-      bind = $mod SHIFT, E, exec, pkill Hyprland
-      bind = $mod, Q, killactive,
-      bind = $mod, F, fullscreen,
-      bind = $mod, G, togglegroup,
-      bind = $mod SHIFT, N, changegroupactive, f
-      bind = $mod SHIFT, P, changegroupactive, b
-      bind = $mod, R, togglesplit,
-      bind = $mod, T, togglefloating,
-      bind = $mod, P, pseudo,
-      bind = $mod ALT, ,resizeactive,
-      # toggle "monocle" (no_gaps_when_only)
-      $kw = dwindle:no_gaps_when_only
-      bind = $mod, M, exec, hyprctl keyword $kw $(($(hyprctl getoption $kw -j | jaq -r '.int') ^ 1))
+      # Change Workspace Mode
+      bind = SUPER_ALT, Space, workspaceopt, allfloat
+      bind = $mainMod, P, pseudo, # dwindle
 
-      # utility commands
-      # launcher
-      bindr = $mod, SUPER_L, exec, anyrun
-      # terminal
-      bind = $mod, Return, exec, kitty
-      # logout menu
-      bind = $mod, Escape, exec, wlogout -p layer-shell
-      # lock screen
-      bind = $mod SHIFT, L, exec, loginctl lock-session
-      # browser
-      bind = $mod, B, exec, firefox
-      # file manager
-      bind = $mod, E, exec, nautilus
 
-      # move focus
-      bind = $mod, left, movefocus, l
-      bind = $mod, right, movefocus, r
-      bind = $mod, up, movefocus, u
-      bind = $mod, down, movefocus, d
+      # Mainmod + Function keys
+      bind = $mainMod, F1, exec, $browser
+      bind = $mainMod, F2, exec, $editor
+      bind = $mainMod, F3, exec, inkscape
+      bind = $mainMod, F4, exec, gimp
+      bind = $mainMod, F5, exec, meld
+      bind = $mainMod, F6, exec, vlc
+      bind = $mainMod, F7, exec, virtualbox
+      bind = $mainMod, F8, exec, $files
+      bind = $mainMod, F9, exec, evolution
+      bind = $mainMod, F10, exec, spotify
+      bind = $mainMod, F11, exec, rofi -show drun
+      bind = $mainMod, F12, exec, rofi -show drun
 
-      # move focus with vim
-      bind = $mod, h, movefocus, l
-      bind = $mod, l, movefocus, r
-      bind = $mod, k, movefocus, u
-      bind = $mod, j, movefocus, d
+      # Special Keys
+      bind = , xf86audioraisevolume, exec, $volume --uo
+      bind = , xf86audiolowervolume, exec, $volume --down
+      bind = , xf86audiomute, exec, $volume --toggle
+      bind = , xf86audioplay, exec, playerctl play-pause
+      bind = , xf86audionext, exec, playerctl next
+      bind = , xf86audioprev, exec, playerctl previous
+      bind = , xf86audiostop, exec, playerctl stop
+      bind = , xf86monbrightnessup, exec, $brightness --inc
+      bind = , xf86monbrightnessdown, exec, $brightness --dec
 
-      # move between workspaces
-      bind = $mod, 1, workspace, 1
-      bind = $mod, 2, workspace, 2
-      bind = $mod, 3, workspace, 3
-      bind = $mod, 4, workspace, 4
-      bind = $mod, 5, workspace, 5
-      bind = $mod, 6, workspace, 6
-      bind = $mod, 7, workspace, 7
-      bind = $mod, 8, workspace, 8
-      bind = $mod, 9, workspace, 9
-      bind = $mod, 0, workspace, 10
+      # Switch workspaces with mainMod + [0-9]
+      bind = $mainMod, 1, workspace, 1
+      bind = $mainMod, 2, workspace, 2
+      bind = $mainMod, 3, workspace, 3
+      bind = $mainMod, 4, workspace, 4
+      bind = $mainMod, 5, workspace, 5
+      bind = $mainMod, 6, workspace, 6
+      bind = $mainMod, 7, workspace, 7
+      bind = $mainMod, 8, workspace, 8
+      bind = $mainMod, 9, workspace, 9
+      bind = $mainMod, 0, workspace, 10
 
-      # move windows between workspaces
-      bind = $mod SHIFT, 1, movetoworkspace, 1
-      bind = $mod SHIFT, 2, movetoworkspace, 2
-      bind = $mod SHIFT, 3, movetoworkspace, 3
-      bind = $mod SHIFT, 4, movetoworkspace, 4
-      bind = $mod SHIFT, 5, movetoworkspace, 5
-      bind = $mod SHIFT, 6, movetoworkspace, 6
-      bind = $mod SHIFT, 7, movetoworkspace, 7
-      bind = $mod SHIFT, 8, movetoworkspace, 8
-      bind = $mod SHIFT, 9, movetoworkspace, 9
-      bind = $mod SHIFT, 0, movetoworkspace, 10
-      bind = $mod SHIFT, right, movetoworkspace, +1
-      bind = $mod SHIFT, left, movetoworkspace, -1
+      # Move active window and follow to workspace
+      bind = $mainMod CTRL, 1, movetoworkspace, 1
+      bind = $mainMod CTRL, 2, movetoworkspace, 2
+      bind = $mainMod CTRL, 3, movetoworkspace, 3
+      bind = $mainMod CTRL, 4, movetoworkspace, 4
+      bind = $mainMod CTRL, 5, movetoworkspace, 5
+      bind = $mainMod CTRL, 6, movetoworkspace, 6
+      bind = $mainMod CTRL, 7, movetoworkspace, 7
+      bind = $mainMod CTRL, 8, movetoworkspace, 8
+      bind = $mainMod CTRL, 9, movetoworkspace, 9
+      bind = $mainMod CTRL, 0, movetoworkspace, 10
+      bind = $mainMod CTRL, bracketleft, movetoworkspace, -1
+      bind = $mainMod CTRL, bracketright, movetoworkspace, +1
+
+      # Move active window to a workspace with mainMod + SHIFT + [0-9]
+      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
+      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
+      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
+      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
+      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
+      bind = $mainMod SHIFT, 6, movetoworkspacesilent, 6
+      bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
+      bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
+      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
+      bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
+      bind = $mainMod SHIFT, bracketleft, movetoworkspacesilent, -1
+      bind = $mainMod SHIFT, bracketright, movetoworkspacesilent, +1
+
+      # Scroll through existing workspaces with mainMod + scroll
+      bind = $mainMod, mouse_down, workspace, e+1
+      bind = $mainMod, mouse_up, workspace, e-1
+      bind = $mainMod, period, workspace, e+1
+      bind = $mainMod, comma, workspace, e-1
+
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = , mouse:276, movewindow
+      bindm = , mouse:275, resizewindow
+      bindm = $mainMod, mouse:272, movewindow
+      bindm = $mainMod, mouse:273, resizewindow
+
+      # Group windows 
+      bind = $mainMod, G, togglegroup
+      bind = $mainMod, tab, changegroupactive, f
+
+      # Switch windows
+
+      bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped 
 
       # window resize
       binde = $mod ALT, L, resizeactive, 80 0
@@ -250,22 +277,5 @@
       bind = , Print, exec, $screenshotarea
       bind = $mod SHIFT, R, exec, $screenshotarea
 
-      bind = CTRL, Print, exec, grimblast --notify --cursor copysave output
-      bind = $mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output
-
-      bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
-      bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
-
-      # special workspace
-      bind = $mod SHIFT, grave, movetoworkspace, special
-      bind = $mod, grave, togglespecialworkspace, eDP-1
-
-      # cycle workspaces
-      bind = $mod, bracketleft, workspace, m-1
-      bind = $mod, bracketright, workspace, m+1
-
-      # cycle monitors
-      bind = $mod SHIFT, braceleft, focusmonitor, l
-      bind = $mod SHIFT, braceright, focusmonitor, r
     '';
 }

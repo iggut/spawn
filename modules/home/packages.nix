@@ -37,7 +37,6 @@ in {
     obsidian
     quodlibet-full
     rsync
-    sfwbar
     todo
     unzip
     vlc
