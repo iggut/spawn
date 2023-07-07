@@ -15,6 +15,7 @@ in {
   imports = [
     ./config.nix ../eww ../../../hosts/${osConfig.networking.hostName}/wallpaper.nix 
     ./sfwbar.nix
+    ./nwgconfig.nix
   ];
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
@@ -23,6 +24,7 @@ in {
     wf-recorder
     brillo
     pamixer
+    nwg-drawer
     python39Packages.requests
     sfwbar
     slurp

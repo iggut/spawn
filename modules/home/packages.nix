@@ -21,6 +21,7 @@ in {
     fd
     ffmpeg
     foliate
+    google-chrome
     gimp
     glow
     grex
@@ -31,7 +32,6 @@ in {
     lm_sensors
     mullvad-vpn # VPN Client
     newsflash
-    nwg-drawer
     nwg-panel
     nmap
     obsidian

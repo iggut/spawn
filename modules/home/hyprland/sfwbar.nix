@@ -29,8 +29,7 @@
       function("SfwbarInit") {
         SetLayer "top"
         SetExclusiveZone "-1"
-        SetMonitor "tint2", "static:DP-1"
-        SetMonitor "tint22", "static:HDMI-A-1"
+        SetMonitor "tint2", "static:eDP-1"
       }
 
       function("ToggleMinimize") {
@@ -85,95 +84,6 @@
             style = "launcher"
           }
 
-
-        pager {
-          style = "pager"
-          rows = 1
-          preview = true
-          numeric = true
-        }
-
-        taskbar {
-          rows = 1
-          css = "* { -GtkWidget-hexpand: true; }" # stretch horizontally
-          icons = true
-          labels = true
-          action[3] = Menu "winops"
-          action[2] = Close
-        }
-
-        tray {
-          rows = 1
-        }
-
-        include("cpu.widget")
-
-        label {
-          style = If(Ident(Pulse),If(Val(Pulse("sink-mute")),"pulseaudio_muted","pulseaudio"),"hidden")
-          trigger = "pulse"
-          value = If(Val(Pulse("sink-mute")),"🔇", Str(Volume) + "% " +
-              Lookup(Volume,66,"",33,"","")) + " " +
-              Str(Val(Pulse("source-volume"))) + "% "
-          action[1] = "pavucontrol"
-          action[2] = "pamixer -t"
-          action[3] = "pavucontrol"
-          action[4] = PulseCmd "sink-volume +1"
-          action[5] = PulseCmd "sink-volume -1"
-        }
-
-        grid {
-          css = "* { padding-left: 0px; padding-right: 5px; }"
-          label {
-            style = "time"
-            interval = 1000
-            css = "* { font: 0.5cm Sans; font-weight: 700; -GtkWidget-align: 0.5; -GtkWidget-hexpand: true; -GtkWidget-vexpand: true; }"
-            value = Time("%k:%M")
-            action = "bash /home/iggut/.config/hypr/scripts/change-bg.sh"
-          }
-
-        label {
-          css = "* { padding-left: 5px; padding-right: 5px; }"
-          style = "date"
-          interval = 1000
-          css = "label { -GtkWidget-align: 0.5; -GtkWidget-hexpand: true; -GtkWidget-vexpand: true; }"
-          value = Time("%a %b %d")
-          action = "morgen"
-          }
-        }
-
-          button {
-            value = "system-shutdown-symbolic"
-            action = "wlogout -p layer-shell"
-            style = "launcherpw"
-          }  
-      }
-
-      layout "tint22" {
-          button {
-            value = "go-home"
-            action = "nwg-drawer"                        # launcher
-            style = "nwg"
-          }
-          button {
-            value = "google-chrome"
-            action = "google-chrome-stable"                        # launch firefox on click
-            style = "launcher"
-          }
-          button {
-            value = "utilities-x-terminal"
-            action = "kitty"
-            style = "launcher"
-          }
-          button {
-            value = "Code"
-            action = "code"
-            style = "launcher"
-          }
-          button {
-            value = "files"
-            action = "thunar"
-            style = "launcher"
-          }
 
         pager {
           style = "pager"
