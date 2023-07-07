@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }: {
 
-  home.persistence = {
-    "/persist/home/iggut".directories = [ ".config/sfwbar" ];
-  };
-
   home.file = {
     xdg.configFile."sfwbar/sfwbar.config".text = ''
       # Display minimized windows on taskbars across all outputs
