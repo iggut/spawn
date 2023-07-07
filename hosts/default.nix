@@ -34,8 +34,17 @@ in {
         ./gs66/hardware.nix
         ./gs66/nvidia.nix
         hw.common-cpu-intel
+        hw.common-gpu-nvidia
         hw.common-pc-laptop
         hmModule
+        hyprland.nixosModules.default
+        {
+          services.xserver.displayManager.gdm.enable = true;
+          services.xserver.displayManager.gdm.wayland = true;
+          programs.hyprland.enable = true;
+          programs.hyprland.nvidiaPatches=true;
+          programs.hyprland.xwayland.enable=true;
+        }
         {inherit home-manager;}
       ]
       ++ shared;
