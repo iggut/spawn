@@ -9,7 +9,6 @@
 (include "./modules/music.yuck")
 (include "./modules/net.yuck")
 (include "./modules/sys.yuck")
-(include "./modules/tray.yuck")
 (include "./modules/volume.yuck")
 (include "./modules/workspaces.yuck")
 
@@ -24,15 +23,13 @@
   (box
     :space-evenly false
     :halign "start"
-    (tray)
-    (music-module)
-    ))
+    (workspaces)))
 
 (defwidget center []
   (box
     :space-evenly false
     :halign "center"
-    (workspaces)))
+    (music-module)))
 
 (defwidget right []
   (box
