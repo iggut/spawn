@@ -34,13 +34,8 @@ in {
         ./gs66/hardware.nix
         ./gs66/nvidia.nix
         hw.common-cpu-intel
-        hw.common-gpu-nvidia
         hw.common-pc-laptop
         hmModule
-        {
-          programs.hyprland.nvidiaPatches=true;
-          programs.hyprland.xwayland.enable=true;
-        }
         {inherit home-manager;}
       ]
       ++ shared;
