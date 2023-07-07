@@ -5,6 +5,19 @@
   #Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "rtsx_pci_sdmmc"
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_uvm"
+        "nvidia_drm"
+      ];
+      kernelModules = [ "coretemp" ];
+    };
+    kernelModules = [ "coretemp" "nvidia-dkms" ];
+  };
 
   services.xserver = {
     videoDrivers = [ "nvidia" ];
@@ -46,11 +59,11 @@
     MOZ_ENABLE_WAYLAND = "1";
     SDL_VIDEODRIVER = "wayland";
     _JAVA_AWT_WM_NONREPARENTING = "1";
-    #QT_QPA_PLATFORM = "wayland-egl";
+    QT_QPA_PLATFORM = "wayland-egl";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line  
-    # GBM_BACKEND = "nvidia-drm";
+    GBM_BACKEND = "nvidia-drm";
     CLUTTER_BACKEND = "wayland";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
@@ -73,6 +86,8 @@
     vulkan-tools
     btop
     neofetch
+    libsForQt5.qt5ct
+    libva
   ];
 
   services.xmr-stak.cudaSupport = true; 
@@ -86,6 +101,8 @@
         vaapiVdpau
         libvdpau-va-gl
         nvidia-vaapi-driver
+        libsForQt5.qt5ct
+        libva
       ];
     };
     pulseaudio.support32Bit = true;
