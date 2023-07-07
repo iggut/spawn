@@ -254,9 +254,9 @@
       bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped 
 
       # window resize
-      binde = $mod ALT, L, resizeactive, 80 0
-      binde = $mod ALT, H, resizeactive, -80 0
-      bind = $mod, S, submap, resize
+      binde = $mainMod ALT, L, resizeactive, 80 0
+      binde = $mainMod ALT, H, resizeactive, -80 0
+      bind = $mainMod, S, submap, resize
 
       submap = resize
       binde = , right, resizeactive, 10 0
@@ -275,7 +275,7 @@
       $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
 
       bind = , Print, exec, $screenshotarea
-      bind = $mod SHIFT, R, exec, $screenshotarea
+      bind = $$mainMod SHIFT, R, exec, $screenshotarea
 
     '';
 }
