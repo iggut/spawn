@@ -37,7 +37,6 @@ in {
         hw.common-gpu-nvidia
         hw.common-pc-laptop
         hmModule
-        hyprland.nixosModules.default
         {
           services.xserver.displayManager.gdm.enable = true;
           services.xserver.displayManager.gdm.wayland = true;

@@ -16,8 +16,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     eww = {
-      # url = "github:elkowar/eww";
-      url = "github:fitzhawke/eww";
+      url = "github:elkowar/eww";
+      #url = "github:fitzhawke/eww";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -26,7 +26,7 @@
     };
     hyprland = {
       url = "github:hyprwm/Hyprland/";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprwm-contrib = {
       url = "github:hyprwm/contrib";
