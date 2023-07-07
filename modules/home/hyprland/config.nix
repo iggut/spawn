@@ -12,11 +12,11 @@
     builtins.readFile ../../../hosts/${osConfig.networking.hostName}/hyprland.txt
     + ''
       # startup programs alongside hyprland
-      
+
       exec-once = hyprpaper
       exec-once = mako
       exec-once = eww daemon && eww open bar &
-      exec-once = sfwbar &
+      #exec-once = sfwbar &
 
       ########################################################
         ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ███████╗
@@ -272,13 +272,13 @@
       bindm = $mainMod, mouse:272, movewindow
       bindm = $mainMod, mouse:273, resizewindow
 
-      # Group windows 
+      # Group windows
       bind = $mainMod, G, togglegroup
       bind = $mainMod, tab, changegroupactive, f
 
       # Switch windows
 
-      bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped 
+      bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped
 
       # window resize
       binde = $mainMod ALT, L, resizeactive, 80 0
