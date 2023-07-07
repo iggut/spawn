@@ -16,12 +16,10 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    fu.url = "github:numtide/flake-utils";
-    
     eww = {
-      url = "github:elkowar/eww";
+      #url = "github:elkowar/eww";
+      url = "github:fitzhawke/eww";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     home-manager = {
@@ -51,11 +49,6 @@
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
     };
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -91,14 +84,16 @@
         imports = [{_module.args.pkgs = config.legacyPackages;}];
 
         devShells.default = pkgs.mkShell {
-          name = "soxyn";
+          name = "iggut";
           packages = with pkgs; [
             nix
             home-manager
             git
 
             nil
+            nwg-drawer
             alejandra
+            sfwbar
 
             sops
             ssh-to-age

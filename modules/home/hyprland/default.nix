@@ -24,9 +24,7 @@ in {
     wf-recorder
     brillo
     pamixer
-    nwg-drawer
     python39Packages.requests
-    sfwbar
     slurp
     swappy
     wl-clipboard
