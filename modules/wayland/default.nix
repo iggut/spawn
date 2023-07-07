@@ -34,6 +34,9 @@
     };
   };
 
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+
   xdg.portal = {
     enable = true;
     wlr.enable = false;
