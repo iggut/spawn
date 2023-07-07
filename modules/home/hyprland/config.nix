@@ -32,11 +32,11 @@
       }
 
       general {
-        gaps_in = 5
-        gaps_out = 10
-        border_size = 2
+        gaps_in=15
+        gaps_out=20
+        border_size=1.7
         col.active_border = rgb(89b4fa) rgb(cba6f7) 270deg
-        col.inactive_border = rgb(11111b) rgb(b4befe) 270deg
+        col.inactive_border = 0x66000000
 
         col.group_border = rgb(313244)
         col.group_border_active = rgb(f5c2e7)
@@ -47,13 +47,14 @@
         key_press_enables_dpms = true
         enable_swallow = true
         swallow_regex=(kitty|Nautilus)
+        vfr=on
       }
 
       decoration {
         active_opacity=0.96
         inactive_opacity=0.85
         fullscreen_opacity=1.0
-        rounding = 16
+        rounding = 10
         multisample_edges = true
         blur_new_optimizations = true
         blur = true
@@ -69,11 +70,24 @@
       }
 
       animations {
-        enabled = true
-        animation = border, 1, 2, default
-        animation = fade, 1, 4, default
-        animation = windows, 1, 3, default, popin 80%
-        animation = workspaces, 1, 2, default, slide
+        enabled=true
+
+        bezier=easein,0.11, 0, 0.5, 0
+        bezier=easeout,0.5, 1, 0.89, 1
+        bezier=easeinout,0.45, 0, 0.55, 1
+
+        animation=windowsIn,1,3,easeout,slide
+        animation=windowsOut,1,3,easein,slide
+        animation=windowsMove,1,3,easeout
+
+        animation=fadeIn,1,3,easeout
+        animation=fadeOut,1,3,easein
+        animation=fadeSwitch,1,3,easeout
+        animation=fadeShadow,1,3,easeout
+        animation=fadeDim,1,3,easeout
+        animation=border,1,3,easeout
+
+        animation=workspaces,1,2,easeout,slide
       }
 
       dwindle {

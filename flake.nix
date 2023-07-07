@@ -16,8 +16,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     eww = {
-      url = "github:elkowar/eww";
-      #url = "github:fitzhawke/eww";
+      #url = "github:elkowar/eww";
+      url = "github:fitzhawke/eww";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
