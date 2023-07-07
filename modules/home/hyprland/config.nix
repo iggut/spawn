@@ -176,7 +176,8 @@
       bind = $mainMod, N, exec, swaync-client -t -sw
       bind = $mainMod SHIFT, N, exec, swaync-client -d -sw
 
-      bindr = SUPER, SUPER_L, exec, nwg-drawer
+      #bindr = SUPER, SUPER_L, exec, nwg-drawer
+      bindr = $mod, SUPER_L, exec, anyrun
 
       bind = $mainMod, D, exec, thunar
       bind = $mainMod SHIFT, Q, killactive,
