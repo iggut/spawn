@@ -75,8 +75,6 @@
     vulkan-tools
     btop
     neofetch
-    nwg-drawer
-    sfwbar
   ];
 
   services.xmr-stak.cudaSupport = true; 
