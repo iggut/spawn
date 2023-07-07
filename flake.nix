@@ -89,6 +89,8 @@
             nix
             home-manager
             git
+            btop
+            neofetch
 
             nil
             nwg-drawer
